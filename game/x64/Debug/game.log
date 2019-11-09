@@ -1,0 +1,99 @@
+﻿  imgui-SFML.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_widgets.cpp
+  Source.cpp
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(57): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(89): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(90): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(94): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(113): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(117): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(121): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(125): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(40): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(41): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(56): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(52): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(59): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(68): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(71): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(160): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(161): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(164): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(174): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(251): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(306): warning C4244: аргумент: преобразование "const T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(322): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(322): warning C4244: аргумент: преобразование "float32" в "int", возможна потеря данных
+  tinystr.cpp
+  tinyxml.cpp
+  tinyxmlerror.cpp
+  tinyxmlparser.cpp
+  Создание кода...
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(334): warning C4715: GameStart: значение возвращается не при всех путях выполнения
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glBindTexture в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glBlendFunc в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glColorPointer в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glDisable в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glDrawElements в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glEnable в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glEnableClientState в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glLoadIdentity в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glMatrixMode в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glOrtho в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glPopAttrib в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glPushAttrib в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glScissor в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glTexCoordPointer в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glVertexPointer в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+imgui-SFML.obj : error LNK2019: ссылка на неразрешенный внешний символ __imp_glViewport в функции "void __cdecl `anonymous namespace'::RenderDrawLists(struct ImDrawData *)" (?RenderDrawLists@?A0x7e824660@@YAXPEAUImDrawData@@@Z)
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual class b2Shape * __cdecl b2CircleShape::Clone(class b2BlockAllocator *)const " (?Clone@b2CircleShape@@UEBAPEAVb2Shape@@PEAVb2BlockAllocator@@@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual int __cdecl b2CircleShape::GetChildCount(void)const " (?GetChildCount@b2CircleShape@@UEBAHXZ)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual bool __cdecl b2CircleShape::TestPoint(struct b2Transform const &,struct b2Vec2 const &)const " (?TestPoint@b2CircleShape@@UEBA_NAEBUb2Transform@@AEBUb2Vec2@@@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual bool __cdecl b2CircleShape::RayCast(struct b2RayCastOutput *,struct b2RayCastInput const &,struct b2Transform const &,int)const " (?RayCast@b2CircleShape@@UEBA_NPEAUb2RayCastOutput@@AEBUb2RayCastInput@@AEBUb2Transform@@H@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual void __cdecl b2CircleShape::ComputeAABB(struct b2AABB *,struct b2Transform const &,int)const " (?ComputeAABB@b2CircleShape@@UEBAXPEAUb2AABB@@AEBUb2Transform@@H@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual void __cdecl b2CircleShape::ComputeMass(struct b2MassData *,float)const " (?ComputeMass@b2CircleShape@@UEBAXPEAUb2MassData@@M@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual class b2Shape * __cdecl b2PolygonShape::Clone(class b2BlockAllocator *)const " (?Clone@b2PolygonShape@@UEBAPEAVb2Shape@@PEAVb2BlockAllocator@@@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual int __cdecl b2PolygonShape::GetChildCount(void)const " (?GetChildCount@b2PolygonShape@@UEBAHXZ)"
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: void __cdecl b2PolygonShape::SetAsBox(float,float)" (?SetAsBox@b2PolygonShape@@QEAAXMM@Z) в функции "public: __cdecl Physic::Physic(class sf::Rect<float>,class Lvl &,class b2World &)" (??0Physic@@QEAA@V?$Rect@M@sf@@AEAVLvl@@AEAVb2World@@@Z)
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual bool __cdecl b2PolygonShape::TestPoint(struct b2Transform const &,struct b2Vec2 const &)const " (?TestPoint@b2PolygonShape@@UEBA_NAEBUb2Transform@@AEBUb2Vec2@@@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual bool __cdecl b2PolygonShape::RayCast(struct b2RayCastOutput *,struct b2RayCastInput const &,struct b2Transform const &,int)const " (?RayCast@b2PolygonShape@@UEBA_NPEAUb2RayCastOutput@@AEBUb2RayCastInput@@AEBUb2Transform@@H@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual void __cdecl b2PolygonShape::ComputeAABB(struct b2AABB *,struct b2Transform const &,int)const " (?ComputeAABB@b2PolygonShape@@UEBAXPEAUb2AABB@@AEBUb2Transform@@H@Z)"
+Source.obj : error LNK2001: неразрешенный внешний символ ""public: virtual void __cdecl b2PolygonShape::ComputeMass(struct b2MassData *,float)const " (?ComputeMass@b2PolygonShape@@UEBAXPEAUb2MassData@@M@Z)"
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: class b2Fixture * __cdecl b2Body::CreateFixture(struct b2FixtureDef const *)" (?CreateFixture@b2Body@@QEAAPEAVb2Fixture@@PEBUb2FixtureDef@@@Z) в функции "public: void __cdecl Lvl::SetWall(class b2World &)" (?SetWall@Lvl@@QEAAXAEAVb2World@@@Z)
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: class b2Fixture * __cdecl b2Body::CreateFixture(class b2Shape const *,float)" (?CreateFixture@b2Body@@QEAAPEAVb2Fixture@@PEBVb2Shape@@M@Z) в функции "public: __cdecl Physic::Physic(class sf::Rect<float>,class Lvl &,class b2World &)" (??0Physic@@QEAA@V?$Rect@M@sf@@AEAVLvl@@AEAVb2World@@@Z)
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __cdecl b2World::b2World(struct b2Vec2 const &)" (??0b2World@@QEAA@AEBUb2Vec2@@@Z) в функции "bool __cdecl GameStart(void)" (?GameStart@@YA_NXZ)
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __cdecl b2World::~b2World(void)" (??1b2World@@QEAA@XZ) в функции "bool __cdecl GameStart(void)" (?GameStart@@YA_NXZ)
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: class b2Body * __cdecl b2World::CreateBody(struct b2BodyDef const *)" (?CreateBody@b2World@@QEAAPEAVb2Body@@PEBUb2BodyDef@@@Z) в функции "public: __cdecl Physic::Physic(class sf::Rect<float>,class Lvl &,class b2World &)" (??0Physic@@QEAA@V?$Rect@M@sf@@AEAVLvl@@AEAVb2World@@@Z)
+Source.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: void __cdecl b2World::Step(float,int,int)" (?Step@b2World@@QEAAXMHH@Z) в функции "bool __cdecl GameStart(void)" (?GameStart@@YA_NXZ)
+C:\Users\ReWoodPC\Desktop\game\GayEngin_SFML\x64\Debug\game.exe : fatal error LNK1120: неразрешенных внешних элементов: 35

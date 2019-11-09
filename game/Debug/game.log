@@ -1,0 +1,55 @@
+﻿  Source.cpp
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(57): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(89): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(90): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\anim.h(94): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(113): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(117): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(121): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(125): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(141): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\level.h(152): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(40): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(41): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\ui.h(56): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(74): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(77): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(166): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(167): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(170): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(180): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(257): warning C4305: аргумент: усечение из "double" в "float"
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(301): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(312): warning C4244: аргумент: преобразование "const T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(328): warning C4244: аргумент: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(328): warning C4244: аргумент: преобразование "float32" в "int", возможна потеря данных
+c:\users\rewoodpc\desktop\game\gayengin_sfml\game\source.cpp(340): warning C4715: GameStart: значение возвращается не при всех путях выполнения
+  game.vcxproj -> C:\Users\ReWoodPC\Desktop\game\GayEngin_SFML\Debug\game.exe
