@@ -90,7 +90,7 @@ public:
 			r.setPosition(x, y);
 			window.draw(r);	 
 		}
-		animList[currentAnim].sprite.setOrigin(27, 27);
+		animList[currentAnim].sprite.setOrigin(animList[currentAnim].sprite.getGlobalBounds().height/2, animList[currentAnim].sprite.getGlobalBounds().width / 2);
 		animList[currentAnim].sprite.setPosition(x, y);
 		window.draw(animList[currentAnim].sprite);
 	}

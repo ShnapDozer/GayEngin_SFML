@@ -8,6 +8,7 @@
 #include <cmath>
 
 #include "level.h"
+#include "Common.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -18,14 +19,6 @@ using namespace sf;
 
 class Physic
 {
-
-protected:
-
-
-	const float SCALE = 30.f;
-	const float DEG = 57.29577f;
-
-
 
 public:
 	FloatRect SIZE;
@@ -59,7 +52,7 @@ public:
 		bdef.type = b2_dynamicBody;
 		bdef.fixedRotation = true;
 
-		shape.SetAsBox(SIZE.width /2 / SCALE, SIZE.height /2 / SCALE);
+		shape.SetAsBox(ScalCent(SIZE.width), ScalCent(SIZE.height));
 		bdef.position.Set((SIZE.left + SIZE.width / 2) / SCALE, (SIZE.top - SIZE.height / 2) / SCALE);
 
 		playBody = World.CreateBody(&bdef);
@@ -75,7 +68,7 @@ public:
 	virtual void update(b2World &World)
 	{
 		b2Vec2 posG = playBody->GetPosition();
-		posG.y += 40 / SCALE;
+		posG.y += (SIZE.height/2+10) / SCALE;
 		for (b2Body* it = World.GetBodyList(); it != 0; it = it->GetNext())
 			for (b2Fixture *f = it->GetFixtureList(); f != 0; f = f->GetNext())
 			{

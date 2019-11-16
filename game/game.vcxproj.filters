@@ -70,5 +70,8 @@
     <ClInclude Include="TinyXML\tinyxml.h">
       <Filter>TMX</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

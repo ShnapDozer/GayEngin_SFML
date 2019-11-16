@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "TinyXML/tinyxml.h"
+#include "Common.h"
 
 #include <Box2D/Box2D.h>
 
@@ -69,8 +70,6 @@ private:
 	Texture t;
 	Sprite Lev;
 
-	const float SCALE = 30.f;
-	const float DEG = 57.29577f;
 public:
 
 	std::vector <Object> Obje;
@@ -98,6 +97,7 @@ public:
 		if (!doc.LoadFile())
 		{
 			std::cout << "XML XYU :(" << std::endl;
+			return;
 		}
 		TiXmlElement *element = doc.FirstChildElement("Name");
 		TiXmlElement *objectel;
@@ -155,12 +155,12 @@ public:
 			{
 
 				b2PolygonShape gr;
-				gr.SetAsBox(Obje[i].rect.width /2/ SCALE, Obje[i].rect.height/2 / SCALE);
+				gr.SetAsBox(Obje[i].rect.width, Obje[i].rect.height);
 
 				b2BodyDef bdef;
 
 				bdef.type = b2_staticBody;
-				bdef.position.Set((Obje[i].rect.left + Obje[i].rect.width / 2) / SCALE, (Obje[i].rect.top - Obje[i].rect.height / 2) / SCALE);
+				bdef.position.Set(Obje[i].rect.left , Obje[i].rect.top );
 
 				b2FixtureDef GrFix;
 

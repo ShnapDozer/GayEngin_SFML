@@ -28,6 +28,7 @@
 #include "level.h"
 #include "UI.h"
 #include "Physics.h"
+#include "Common.h"
 
 #include "TinyXML/tinyxml.h"
 
@@ -86,6 +87,8 @@ void Hide()
 	ShowWindow(Hide, 0);
 }
 
+
+
 bool GameStart()
 {
 
@@ -99,11 +102,6 @@ bool GameStart()
 	const int x = 1280;
 	const int y = 720;
 
-	const float SCALE = 30.f;
-	const float DEG = 57.29577f;
-
-	std::string type = "Box";
-
 	float Dx = 1000;
 	float Dy = 1000;
 
@@ -111,14 +109,16 @@ bool GameStart()
 	const ImVec2 ConsMenuPos(x - 300, 0);
 
 	b2Vec2 Gravity(0.f, 14.0f);
-	b2World World(Gravity);
 
 	//-----------------------------------------
 
 	bool inventor = false;
 
-	RectangleShape rectw(sf::Vector2f(50, 50));
+	b2World World(Gravity);
+
+	RectangleShape rectw(sf::Vector2f(3068, 53));
 	rectw.setFillColor(Color(125, 185, 163));
+	rectw.setOrigin(rectw.getSize().x / 2, rectw.getSize().y / 2);
 
 	RectangleShape item(sf::Vector2f(5, 5));
 	item.setFillColor(Color(125, 0, 163));
@@ -141,10 +141,8 @@ bool GameStart()
 
 	//Hero and Entity
 	Object player = level.getObj("Play");
-	//Object people = level.getObj("People");
 
 	FloatRect sizeH{ player.rect.left, player.rect.top,54,54 };
-	//FloatRect sizeP{ people.rect.left, people.rect.top,27,27 };
 
 	FloatRect sizeI{ 1000, 100,50,50 };
 
@@ -152,7 +150,8 @@ bool GameStart()
 
 	Physic HERO(sizeH, level, World);
 
-	PhysicIt ItemB(sizeI, World, type,1);
+	PhysicIt ItemB(sizeI, World, "Box" ,1);
+
 
 	//UI
 	Inventory i("Res/UI/", inventor);
@@ -239,8 +238,6 @@ bool GameStart()
 		if (Keyboard::isKeyPressed(Keyboard::D)) { if (vel.x < 20) { HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  A.set("Run"); }
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
-
-
 			if (HERO.onGround == true && vel.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); A.set("Run"); HERO.onGround = false; }
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -280,9 +277,9 @@ bool GameStart()
 
 			if (ImGui::Button("RectPaint")) { if (rect)rect = false; else rect = true; }
 			
-			ImGui::Value("y", posB.y);
-			ImGui::Value("x", posB.x);
-			ImGui::Value("Score", HERO.onGround);
+			ImGui::Value("y", posH.x);
+			ImGui::Value("x", posH.y);
+			ImGui::Value("What", HERO.onGround);
 
 			ImGui::SliderFloat("Dx", &Dx, 0, 1000);
 			ImGui::SliderFloat("Dy", &Dy, 0,1000 );
@@ -296,12 +293,14 @@ bool GameStart()
 
 		level.Draw(window);
 
+		
+
 		if (rect)
 		{
-			for (int i = 0; i < level.Obje.size(); i++)
+			for (int i = 0; i < level.WallInf.size(); i++)
 			{
-				rectw.setPosition(level.Obje[i].rect.left, level.Obje[i].rect.top);
-				rectw.setSize(sf::Vector2f(level.Obje[i].rect.width, level.Obje[i].rect.height));
+				b2Vec2 posW = level.WallInf[i].Body->GetPosition();
+				rectw.setPosition(posW.x*SCALE, posW.y*SCALE);
 				window.draw(rectw);
 			}
 		}
@@ -326,7 +325,6 @@ bool GameStart()
 		}
 
 		A.draw(window, posH.x*SCALE, posH.y*SCALE, HERO.SIZE.height, HERO.SIZE.width);
-		//P.draw(window, people.rect.left, people.rect.top);
 
 		window.draw(item);
 
