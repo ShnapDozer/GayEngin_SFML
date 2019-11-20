@@ -31,6 +31,7 @@ public:
 
 	b2BodyDef bdef;
 	b2Body* playBody;
+	b2FixtureDef BoxFix;
 	BodyInf Play;
 
 
@@ -43,10 +44,7 @@ public:
 	{
 
 		
-
-		onGround = false;
 		this->SIZE = SIZE;
-
 
 
 		bdef.type = b2_dynamicBody;
@@ -67,20 +65,21 @@ public:
 
 	virtual void update(b2World &World)
 	{
-		b2Vec2 posG = playBody->GetPosition();
-		posG.y += (SIZE.height/2+10) / SCALE;
+		
+		b2Vec2 pos = playBody->GetPosition();
+		pos.y += (SIZE.height/2 +1) / SCALE;
 		for (b2Body* it = World.GetBodyList(); it != 0; it = it->GetNext())
 			for (b2Fixture *f = it->GetFixtureList(); f != 0; f = f->GetNext())
-			{
-				if (f->TestPoint(posG))  onGround = true;
-			}
+		     if (f->TestPoint(pos))  onGround = true;
+			
 	}
 
-	FloatRect GetR()
+	FloatRect GetPosition()
 	{
-		FloatRect r{ bdef.position.x,bdef.position.y,SIZE.width,SIZE.height };
+		FloatRect r{ bdef.position.x * SCALE,bdef.position.y * SCALE,SIZE.width * SCALE, SIZE.height * SCALE };
 		return r;
 	}
+
 
 
 };
@@ -91,7 +90,7 @@ protected:
 	std::string type;
 public:
 
-	PhysicIt(FloatRect SIZE, b2World &World, std::string type,float height) 
+	PhysicIt(std::string type, FloatRect SIZE, b2World &World,float height)
 	{
 		
 		this->SIZE = SIZE;
@@ -99,20 +98,23 @@ public:
 		bdef.type = b2_dynamicBody;
 		bdef.fixedRotation = false;
 
-		if (type == "Box") { shape.SetAsBox(SIZE.width / 2 / SCALE, SIZE.height / 2 / SCALE); }
+		if (type == "Box") 
+		{ 
+			shape.SetAsBox(SIZE.width / 2 / SCALE, SIZE.height / 2 / SCALE);
+
+			BoxFix.shape = &shape;
+			BoxFix.friction = 10;
+		}
 		if (type == "Circle") { circle.m_radius = SIZE.width / SCALE; }
+
 
 		bdef.position.Set(SIZE.left / SCALE, SIZE.top / SCALE);
 		playBody = World.CreateBody(&bdef);
 
-		if (type == "Box") { playBody->CreateFixture(&shape, height); BodyInf Play("Box", shape, bdef, playBody); }
-		if (type == "Circle") { playBody->CreateFixture(&circle, height); BodyInf Play("Circle", circle, bdef, playBody);}
 
-	}
+		if (type == "Box") { playBody->CreateFixture(&BoxFix);  Play = { "Box", shape, bdef, playBody }; }
+		if (type == "Circle") { playBody->CreateFixture(&circle, height);  Play = { "Circle", circle, bdef, playBody }; }
 
-	void update() 
-	{
-		
 	}
 
 };

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="windows-1251" standalone="yes" ?>
 <Name>
-    <Rect H="-0,714286" W="51,1354" Y="46,3492" X="51,2604" name="Solid" />
+    <Rect H="23,7138" W="0,837965" Y="22,9752" X="0,226594" name="Solid" />
+    <Rect H="2,9336" W="51,4575" Y="48,5257" X="51,4389" name="Solid" />
+    <Rect H="24,5278" W="1,17945" Y="25,0024" X="102,849" name="Solid" />
 </Name>

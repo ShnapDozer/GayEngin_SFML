@@ -4,6 +4,9 @@
 //only png image!
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
+#include "Common.h"
+
 #include <iostream>
 #include <String>
 #include <vector>
@@ -82,18 +85,20 @@ public:
 		animList[currentAnim].flip = 0;
 	}
 
-	void draw(RenderWindow &window, int x = 0, int y = 0, int sx = 0, int sy = 0,  bool rect = false)
+	void draw(RenderWindow &window, int x = 0, int y = 0, float angle = 0 )
 	{
-		if (rect == true) 
-		{
-			sf::RectangleShape r(sf::Vector2f(sx, sy)); 
-			r.setPosition(x, y);
-			window.draw(r);	 
-		}
 		animList[currentAnim].sprite.setOrigin(animList[currentAnim].sprite.getGlobalBounds().height/2, animList[currentAnim].sprite.getGlobalBounds().width / 2);
 		animList[currentAnim].sprite.setPosition(x, y);
+		animList[currentAnim].sprite.setRotation(angle*DEG);
 		window.draw(animList[currentAnim].sprite);
 	}
+
+	sf::Vector2u GetSize() 
+	{
+		sf::Vector2u r = animList[currentAnim].t.getSize();
+
+		return r;
+    }
 
 	void flip(bool b = 1) { animList[currentAnim].flip = b; }
 

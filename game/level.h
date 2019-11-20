@@ -124,6 +124,12 @@ public:
 			{
 				size.height = atoi(objectel->Attribute("H"));
 			}
+
+			size.left   = size.left / SCALE + size.width / 2 / SCALE;
+			size.top    = size.top / SCALE + size.height / 2 / SCALE;
+			size.width  = size.width  / 2 / SCALE;
+			size.height = size.height / 2 / SCALE;
+
 			Object o(nameobj, size);
 			Obje.push_back(o);
 			objectel = objectel->NextSiblingElement("Rect");

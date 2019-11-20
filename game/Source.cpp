@@ -116,12 +116,10 @@ bool GameStart()
 
 	b2World World(Gravity);
 
-	RectangleShape rectw(sf::Vector2f(3068, 53));
+	RectangleShape rectw(sf::Vector2f(5, 5));
 	rectw.setFillColor(Color(125, 185, 163));
 	rectw.setOrigin(rectw.getSize().x / 2, rectw.getSize().y / 2);
 
-	RectangleShape item(sf::Vector2f(5, 5));
-	item.setFillColor(Color(125, 0, 163));
 
 
 
@@ -134,23 +132,33 @@ bool GameStart()
 
 	view.reset(FloatRect(0, 0, 1280, 720));
 
+	//Level
 	Lvl level("Res/Map/test.xml", "Res/BackGround/Background.png");
 	level.Load();
 	level.SetWall(World);
 
+	
+	//Animation
+	AnimManager Her;
+	Her.create("Run", "Res/Hero/H", 0.003, 7);
+	Her.create("Stay", "Res/Hero/HS", 0.003, 1);
 
+	AnimManager BoxA;
+	BoxA.create("Stay", "Res/Other/Box", 0.003, 1);
+
+
+	
 	//Hero and Entity
 	Object player = level.getObj("Play");
 
 	FloatRect sizeH{ player.rect.left, player.rect.top,54,54 };
-
-	FloatRect sizeI{ 1000, 100,50,50 };
+	FloatRect sizeB{ 1000, 100, 60,62 };
 
 	People h(sizeH);
 
 	Physic HERO(sizeH, level, World);
 
-	PhysicIt ItemB(sizeI, World, "Box" ,1);
+	PhysicIt Box1("Box", sizeB, World, 1);
 
 
 	//UI
@@ -159,14 +167,6 @@ bool GameStart()
 	i.add(1);
 	i.add(2);
 
-
-	//Animation
-	AnimManager A;
-	A.create("Run", "Res/Hero/H", 0.003, 7);
-	A.create("Stay", "Res/Hero/HS", 0.003, 1);
-
-	AnimManager P;
-	P.create("NAM", "Res/Hero/P", 0.003, 4);
 
 
 	Clock Time;
@@ -228,17 +228,15 @@ bool GameStart()
 		//----------------------Box2d
 
 		World.Step(1.0f / 60.f, 8, 3);
-		b2Vec2 posH = HERO.playBody->GetPosition();
-		b2Vec2 posB = ItemB.playBody->GetPosition();
-		b2Vec2 vel = HERO.playBody->GetLinearVelocity();
+		b2Vec2 a = HERO.playBody->GetLinearVelocity();
 
 		//----------------------Клава:
 
-		if (Keyboard::isKeyPressed(Keyboard::A)) { if (vel.x > -20) { HERO.playBody->ApplyForceToCenter(b2Vec2(-Dx, 0), 1); }  A.set("Run"); }
-		if (Keyboard::isKeyPressed(Keyboard::D)) { if (vel.x < 20) { HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  A.set("Run"); }
+		if (Keyboard::isKeyPressed(Keyboard::A)) { if (a.x > -20) { HERO.playBody->ApplyForceToCenter(b2Vec2(-Dx, 0), 1); }  Her.set("Run"); }
+		if (Keyboard::isKeyPressed(Keyboard::D)) { if (a.x < 20) { HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  Her.set("Run"); }
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			if (HERO.onGround == true && vel.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); A.set("Run"); HERO.onGround = false; }
+			if (HERO.onGround == true && a.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); Her.set("Run"); HERO.onGround = false; }
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
@@ -276,9 +274,11 @@ bool GameStart()
 			ImGui::SetWindowPos(ConsMenuPos);
 
 			if (ImGui::Button("RectPaint")) { if (rect)rect = false; else rect = true; }
+
 			
-			ImGui::Value("y", posH.x);
-			ImGui::Value("x", posH.y);
+			
+			ImGui::Value("y", 1);
+			ImGui::Value("x", 1);
 			ImGui::Value("What", HERO.onGround);
 
 			ImGui::SliderFloat("Dx", &Dx, 0, 1000);
@@ -305,15 +305,18 @@ bool GameStart()
 			}
 		}
 
-		item.setPosition(posB.x, posB.y);
-		item.setSize(sf::Vector2f(ItemB.SIZE.width, ItemB.SIZE.height));
 
 		i.update(MapPos, view.getCenter().x, view.getCenter().y, x, y);
 		
 		HERO.update(World);
 
-		A.tick(time);
-		P.tick(time);
+		b2Vec2 posH = HERO.playBody->GetPosition();
+		b2Vec2 posB = Box1.playBody->GetPosition();
+		float ang = Box1.playBody->GetAngle();
+		
+		Her.tick(time);
+		BoxA.tick(time);
+		if (a.x == 0) Her.set("Stay");
 
 
 
@@ -324,9 +327,8 @@ bool GameStart()
 			i.draw(window);
 		}
 
-		A.draw(window, posH.x*SCALE, posH.y*SCALE, HERO.SIZE.height, HERO.SIZE.width);
-
-		window.draw(item);
+		Her.draw  (window, posH.x*SCALE, posH.y*SCALE);
+		BoxA.draw (window, posB.x*SCALE, posB.y*SCALE, ang);
 
 
 		ImGui::SFML::Render(window);
