@@ -114,6 +114,10 @@ bool GameStart()
 
 	bool inventor = false;
 
+	b2Vec2 posH;
+	b2Vec2 posB;
+	float ang;
+
 	b2World World(Gravity);
 
 	RectangleShape rectw(sf::Vector2f(5, 5));
@@ -207,20 +211,30 @@ bool GameStart()
 
 			if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::E)
+				switch (event.key.code) 
 				{
-					switch (inventor)
+				case sf::Keyboard::B:
+					Box1.Boom(10000, 100, World);
+
+					break;
+				case sf::Keyboard::R:
+					return true;
+
+					break;
+				case sf::Keyboard::E:
+					if (inventor) inventor = false;
+					else inventor = true;
+
+					break;
+				case sf::Keyboard::C:
+
+					for (int i = 0; i < Box1.BullList.size(); i++)
 					{
-
-					case true:
-						inventor = false;
-						break;
-
-					case false:
-						inventor = true;
-						break;
+						World.DestroyBody(Box1.BullList[i]);
 					}
-					
+					Box1.BullList.clear();
+
+					break;
 				}
 			}
 		}
@@ -232,19 +246,17 @@ bool GameStart()
 
 		//----------------------Клава:
 
+		if (HERO.onGround) { Dx = 1000; }
+		else { Dx = 500; }
 		if (Keyboard::isKeyPressed(Keyboard::A)) { if (a.x > -20) { HERO.playBody->ApplyForceToCenter(b2Vec2(-Dx, 0), 1); }  Her.set("Run"); }
 		if (Keyboard::isKeyPressed(Keyboard::D)) { if (a.x < 20) { HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  Her.set("Run"); }
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			if (HERO.onGround == true && a.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); Her.set("Run"); HERO.onGround = false; }
+			if (HERO.onGround == true && a.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); Her.set("Run"); HERO.onGround = false;}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			if (inventor == true) { inventor = false; }
-		}
-		if (Keyboard::isKeyPressed(Keyboard::R))
-		{
-			return true;
 		}
 		if (event.type == sf::Event::MouseWheelScrolled)
 		{
@@ -277,8 +289,8 @@ bool GameStart()
 
 			
 			
-			ImGui::Value("y", 1);
-			ImGui::Value("x", 1);
+			ImGui::Value("y", posH.y);
+			ImGui::Value("x", posH.x);
 			ImGui::Value("What", HERO.onGround);
 
 			ImGui::SliderFloat("Dx", &Dx, 0, 1000);
@@ -295,11 +307,11 @@ bool GameStart()
 
 		
 
-		if (rect)
+		if (rect &&  !Box1.BullList.empty())
 		{
-			for (int i = 0; i < level.WallInf.size(); i++)
+			for (int i = 0; i < Box1.BullList.size(); i++)
 			{
-				b2Vec2 posW = level.WallInf[i].Body->GetPosition();
+				b2Vec2 posW = Box1.BullList[i]->GetPosition();
 				rectw.setPosition(posW.x*SCALE, posW.y*SCALE);
 				window.draw(rectw);
 			}
@@ -310,13 +322,15 @@ bool GameStart()
 		
 		HERO.update(World);
 
-		b2Vec2 posH = HERO.playBody->GetPosition();
-		b2Vec2 posB = Box1.playBody->GetPosition();
-		float ang = Box1.playBody->GetAngle();
+		posH = HERO.playBody->GetPosition();
+        posB = Box1.playBody->GetPosition();
+		ang  = Box1.playBody->GetAngle();
 		
 		Her.tick(time);
 		BoxA.tick(time);
-		if (a.x == 0) Her.set("Stay");
+
+		if (a.x <  15 && a.x >=0 ) Her.set("Stay");
+		if (a.x > -15 && a.x <= 0) Her.set("Stay");
 
 
 

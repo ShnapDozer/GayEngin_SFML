@@ -70,7 +70,7 @@ public:
 		pos.y += (SIZE.height/2 +1) / SCALE;
 		for (b2Body* it = World.GetBodyList(); it != 0; it = it->GetNext())
 			for (b2Fixture *f = it->GetFixtureList(); f != 0; f = f->GetNext())
-		     if (f->TestPoint(pos))  onGround = true;
+				if (f->TestPoint(pos))  onGround = true;
 			
 	}
 
@@ -87,8 +87,11 @@ public:
 class PhysicIt : public Physic
 {
 protected:
+	b2Vec2 center;
 	std::string type;
 public:
+
+	std::vector <b2Body*> BullList;
 
 	PhysicIt(std::string type, FloatRect SIZE, b2World &World,float height)
 	{
@@ -111,10 +114,47 @@ public:
 		bdef.position.Set(SIZE.left / SCALE, SIZE.top / SCALE);
 		playBody = World.CreateBody(&bdef);
 
-
 		if (type == "Box") { playBody->CreateFixture(&BoxFix);  Play = { "Box", shape, bdef, playBody }; }
 		if (type == "Circle") { playBody->CreateFixture(&circle, height);  Play = { "Circle", circle, bdef, playBody }; }
 
+		
+	}
+
+	void Boom(float blastPower, int numRays, b2World &World)
+	{
+		center = {34,40};
+
+		for (int i = 0; i < numRays; i++)
+		{
+			float angle = (i / (float)numRays) * 360 * DEG;
+			b2Vec2 rayDir(sinf(angle), cosf(angle));
+
+			b2BodyDef bd;
+			bd.bullet = true;
+			bd.type = b2_dynamicBody;
+			bd.fixedRotation = true; // Вращение необязательное
+			bd.linearDamping = 10;
+			bd.gravityScale = 0; // Игнорирвать гравитацию
+			bd.position = center; // Начальная точка в центре взрыва
+			bd.linearVelocity = blastPower * rayDir;
+			b2Body* body = World.CreateBody(&bd);
+
+			BullList.push_back(body);
+
+			b2CircleShape circleShape;
+			circleShape.m_radius = 0.5; // Очень маленький радиус для тела
+
+			b2FixtureDef fd;
+			fd.shape = &circleShape;
+			fd.density = 60 / (float)numRays;
+			fd.friction = 0; // Трение необязательно
+			fd.restitution = 0.99f; // Отражение от тел
+			fd.filter.groupIndex = -1; // Частицы не должны сталкиваться друг с другом
+			body->CreateFixture(&fd);
+
+		}
+
+		
 	}
 
 };

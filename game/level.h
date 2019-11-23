@@ -30,6 +30,7 @@ public:
 class BodyInf 
 {
 public:
+
 	b2PolygonShape PolygonShape;
 	b2CircleShape PolygonCircle;
 	b2BodyDef BodyDef;
