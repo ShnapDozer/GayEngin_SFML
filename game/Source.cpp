@@ -69,14 +69,16 @@ namespace ImGui
 }
 
 
-void viewset(RenderWindow &window, float x, float y,int maxx,int maxy)
+void viewset(RenderWindow &window, b2Vec2 pos,int maxx,int maxy)
 {
+	pos.x = pos.x*SCALE;
+	pos.y = pos.y*SCALE;
 	window.setView(view);
-	if (y  <= maxy/2) { y = maxy / 2; }
-	if (y  >= 150*16-344) { y = 150 * 16 - 360; }
-	if (x >= 300 * 16 - 624) { x = 300 * 16 - 640; }
-	if (x  <= maxx/2) { x = maxx / 2; }
-	view.setCenter(x, y);
+	if (pos.y  <= maxy/2) { pos.y = maxy / 2; }
+	if (pos.y  >= 150*16-344) { pos.y = 150 * 16 - 360; }
+	if (pos.x >= 300 * 16 - 624) { pos.x = 300 * 16 - 640; }
+	if (pos.x  <= maxx/2) { pos.x = maxx / 2; }
+	view.setCenter(pos.x, pos.y);
 }
 
 void Hide()
@@ -85,6 +87,15 @@ void Hide()
 	AllocConsole();
 	Hide = FindWindowA("ConsoleWindowClass", NULL);
 	ShowWindow(Hide, 0);
+}
+
+void BullClear(std::vector <b2Body*> &BullList, b2World &World)
+{
+	for (int i = 0; i < BullList.size(); i++)
+	{
+		World.DestroyBody(BullList[i]);
+	}
+	BullList.clear();
 }
 
 
@@ -114,9 +125,7 @@ bool GameStart()
 
 	bool inventor = false;
 
-	b2Vec2 posH;
-	b2Vec2 posB;
-	float ang;
+	
 
 	b2World World(Gravity);
 
@@ -162,7 +171,7 @@ bool GameStart()
 
 	Physic HERO(sizeH, level, World);
 
-	PhysicIt Box1("Box", sizeB, World, 1);
+	PhysicIt Box("Box", sizeB, World, 1);
 
 
 	//UI
@@ -214,7 +223,7 @@ bool GameStart()
 				switch (event.key.code) 
 				{
 				case sf::Keyboard::B:
-					Box1.Boom(10000, 100, World);
+					Box.Boom(10000, 100, World);
 
 					break;
 				case sf::Keyboard::R:
@@ -227,12 +236,7 @@ bool GameStart()
 
 					break;
 				case sf::Keyboard::C:
-
-					for (int i = 0; i < Box1.BullList.size(); i++)
-					{
-						World.DestroyBody(Box1.BullList[i]);
-					}
-					Box1.BullList.clear();
+					BullClear(Box.BullList, World);
 
 					break;
 				}
@@ -249,7 +253,10 @@ bool GameStart()
 		if (HERO.onGround) { Dx = 1000; }
 		else { Dx = 500; }
 		if (Keyboard::isKeyPressed(Keyboard::A)) { if (a.x > -20) { HERO.playBody->ApplyForceToCenter(b2Vec2(-Dx, 0), 1); }  Her.set("Run"); }
-		if (Keyboard::isKeyPressed(Keyboard::D)) { if (a.x < 20) { HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  Her.set("Run"); }
+		if (Keyboard::isKeyPressed(Keyboard::D)) { if (a.x < 20) 
+		{ 
+			HERO.playBody->ApplyForceToCenter(b2Vec2(Dx, 0), 1); }  Her.set("Run"); 
+		}
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			if (HERO.onGround == true && a.y > -5) { HERO.playBody->ApplyForceToCenter(b2Vec2(0, -Dy), 0); Her.set("Run"); HERO.onGround = false;}
@@ -272,7 +279,6 @@ bool GameStart()
 		Vector2f size = window.getView().getSize();
 		event.mouseWheelScroll.delta = 0;
 
-
 		//----------------------Imgui
 
 		
@@ -289,8 +295,8 @@ bool GameStart()
 
 			
 			
-			ImGui::Value("y", posH.y);
-			ImGui::Value("x", posH.x);
+			ImGui::Value("y", HERO.pos.y);
+			ImGui::Value("x", HERO.pos.x);
 			ImGui::Value("What", HERO.onGround);
 
 			ImGui::SliderFloat("Dx", &Dx, 0, 1000);
@@ -307,11 +313,11 @@ bool GameStart()
 
 		
 
-		if (rect &&  !Box1.BullList.empty())
+		if (rect && !Box.BullList.empty())
 		{
-			for (int i = 0; i < Box1.BullList.size(); i++)
+			for (int i = 0; i < Box.BullList.size(); i++)
 			{
-				b2Vec2 posW = Box1.BullList[i]->GetPosition();
+				b2Vec2 posW = Box.BullList[i]->GetPosition();
 				rectw.setPosition(posW.x*SCALE, posW.y*SCALE);
 				window.draw(rectw);
 			}
@@ -321,10 +327,7 @@ bool GameStart()
 		i.update(MapPos, view.getCenter().x, view.getCenter().y, x, y);
 		
 		HERO.update(World);
-
-		posH = HERO.playBody->GetPosition();
-        posB = Box1.playBody->GetPosition();
-		ang  = Box1.playBody->GetAngle();
+		Box.update();
 		
 		Her.tick(time);
 		BoxA.tick(time);
@@ -334,15 +337,15 @@ bool GameStart()
 
 
 
-		viewset(window, posH.x*SCALE, posH.y*SCALE, x, y);
+		viewset(window, HERO.pos, x, y);
 
 		if (inventor == true)
 		{
 			i.draw(window);
 		}
 
-		Her.draw  (window, posH.x*SCALE, posH.y*SCALE);
-		BoxA.draw (window, posB.x*SCALE, posB.y*SCALE, ang);
+		Her.draw  (window, HERO.pos);
+		BoxA.draw (window, Box.pos, Box.angle);
 
 
 		ImGui::SFML::Render(window);

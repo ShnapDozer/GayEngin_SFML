@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include <Box2D/Box2D.h>
+
 #include "Common.h"
 
 #include <iostream>
@@ -32,37 +34,45 @@ class Animation
 public:
 	int framov;
 	float speed, currentf;
-	bool isplay, flip, loop;
-	std::string File;
-	Texture t;
+	bool isplay;
+
 	Sprite sprite;
+
+	std::vector <Texture> TextureList;
+
 	Animation()
 	{
 		isplay = true;
-		flip = false;
-		bool lop = true;
 		currentf = 0;
 	}
 	Animation(std::string file, float speeed, int frameov)
 	{
-		t.loadFromFile(file + numList[0]);
+		for (int i = 0; i < frameov; i++)
+		{
+			Texture t;
+			
+			t.loadFromFile(file + numList[i]);
+			
+			TextureList.push_back(t);
+		}
 		speed = speeed;
 		framov = frameov;
-		File = file;
 		currentf = 0;
-		flip = false;
+		isplay = true;
 	}
 	void tik(float time)
 	{
 		if (!isplay)return;
 		currentf += speed * time;
 		if (currentf > framov)currentf = 0;
-		int i = currentf; std::string filee = File + numList[i];
-		t.loadFromFile(File + numList[i]);
-		if (flip)t.loadFromFile(File + mirror + numList[i]);;
-		sprite.setTexture(t);
-
-
+	}
+	Sprite CurSprtSet(b2Vec2 posA = { 0,0 }, float angle = 0)
+	{
+		sprite.setTexture(TextureList[currentf]);
+		sprite.setOrigin(sprite.getGlobalBounds().height / 2, sprite.getGlobalBounds().width / 2);
+		sprite.setPosition(posA.x*SCALE, posA.y*SCALE);
+		sprite.setRotation(angle*DEG);
+		return sprite;
 	}
 };
 class AnimManager
@@ -71,35 +81,41 @@ public:
 	std::string currentAnim;
 	std::map<std::string, Animation> animList;
 
-	void create(std::string name, std::string file, float speeed, int frameov)
+	
+	float speed;
+	int frameov, currentf;
+
+	bool isplay, flip, loop;
+
+
+	void create(std::string name, std::string file, float speed, int frameov)
 	{
-		Animation f(file, speeed, frameov);
-		animList[name] = f;
+
+		this->speed = speed;
+		this->frameov = frameov;
+
+		Animation A(file, speed, frameov);
+		animList[name] = A;
 		currentAnim = name;
 	}
-	void tick(float time) { animList[currentAnim].tik(time); }
+	
+	void tick(float time) 
+	{ 
+		animList[currentAnim].tik(time);
+	}
 
 	void set(std::string name)
 	{
 		currentAnim = name;
-		animList[currentAnim].flip = 0;
 	}
 
-	void draw(RenderWindow &window, int x = 0, int y = 0, float angle = 0 )
+	void draw(RenderWindow &window, b2Vec2 posA = {0,0}, float angle = 0)
 	{
-		animList[currentAnim].sprite.setOrigin(animList[currentAnim].sprite.getGlobalBounds().height/2, animList[currentAnim].sprite.getGlobalBounds().width / 2);
-		animList[currentAnim].sprite.setPosition(x, y);
-		animList[currentAnim].sprite.setRotation(angle*DEG);
-		window.draw(animList[currentAnim].sprite);
+		window.draw(animList[currentAnim].CurSprtSet(posA, angle));
 	}
 
-	sf::Vector2u GetSize() 
-	{
-		sf::Vector2u r = animList[currentAnim].t.getSize();
 
-		return r;
-    }
-
+	/*
 	void flip(bool b = 1) { animList[currentAnim].flip = b; }
 
 	void pause() { animList[currentAnim].isplay = false; }
@@ -108,7 +124,7 @@ public:
 
 	void play(std::string name) { animList[name].isplay = true; }
 
-	bool isPlaying() { return animList[currentAnim].isplay; }
+	bool isPlaying() { return animList[currentAnim].isplay; }*/
 
 };
 
